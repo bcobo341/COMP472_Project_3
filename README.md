@@ -5,7 +5,7 @@
 ##### Python
 - Install `python` and `pip`
 - Install `gensim` using `pip install -U gensim`
-- - Install `pandas` using `pip install pandas`
+- Install `pandas` using `pip install pandas`
 - Run `python3 MP3.py` on the project directory 
 
 #### Team members:
