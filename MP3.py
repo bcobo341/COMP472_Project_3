@@ -41,7 +41,7 @@ f.close()
 
 f = open('analysis.csv', 'w', newline='')
 writer = csv.writer(f)
-header = ['model name', 'vocabulary size', 'correct(c)', 'without_guess(V)','accuracy']
+header = ['model name', 'vocabulary size', 'correct(C)', 'without_guess(V)','accuracy']
 data = ['word2vec-google-news-300', str(len(word2vec)), str(correct), str(without_guess),str(correct/without_guess)]
 writer.writerow(header)
 writer.writerow(data)
