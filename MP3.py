@@ -2,8 +2,29 @@ import pandas
 import csv
 from gensim import models, similarities, downloader
 
-## Task 1: Evaluation of the word2vec-google-news-300 Pre-trained Model
+def analyze(model, dicts):
+  correct = 0
+  without_guess = 0
+  for i, x in enumerate(dicts):
+    if x['question'] in model.key_to_index:
+      similarity = []
+      similarity.append(model.similarity(x['question'], x['0']))
+      similarity.append(model.similarity(x['question'], x['1']))
+      similarity.append(model.similarity(x['question'], x['2']))
+      similarity.append(model.similarity(x['question'], x['3']))
+      max_value = max(similarity)
+      max_index = similarity.index(max_value)
+      if(x[str(max_index)] == x['answer']):
+        print ('{0}) question: {1}, guess-word: {2}, correct'.format(i,x['question'],x[str(max_index)]))
+        correct+=1
+      else:
+        print ('{0}) question: {1}, guess-word: {2}, wrong'.format(i,x['question'],x[str(max_index)]))
+      without_guess+=1
+  else:
+    print('guess')
+  return correct, without_guess
 
+## Task 1: Evaluation of the word2vec-google-news-300 Pre-trained Model
 word2vec = downloader.load('word2vec-google-news-300')
 df = pandas.read_csv('synonyms.csv')
 dicts = df.to_dict('records')
@@ -45,4 +66,13 @@ header = ['model name', 'vocabulary size', 'correct(C)', 'without_guess(V)','acc
 data = ['word2vec-google-news-300', str(len(word2vec)), str(correct), str(without_guess),str(correct/without_guess)]
 writer.writerow(header)
 writer.writerow(data)
+
+
+## Task 2: Comparison with Other Pre-trained Models
+
+glove_twitter_25 = downloader.load('glove-twitter-25')
+glove_twitter_200 = downloader.load('glove-twitter-200')
+glove_wiki_gigaword_50 = downloader.load('glove-wiki-gigaword-50')
+glove_wiki_gigaword_300 = downloader.load('glove-wiki-gigaword-300')
+
 f.close()
