@@ -1,2 +1,6 @@
 word2vec-google-news-300-details.csv
 analysis.csv
+glove-twitter-25-details.csv
+glove-twitter-200-details.csv
+glove-wiki-gigaword-50-details.csv
+glove-wiki-gigaword-300.csv
